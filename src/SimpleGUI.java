@@ -1,57 +1,111 @@
-import javax.swing.*; // Importa as classes do Swing (JFrame, JButton, JLabel, etc.)
+import javax.swing.*; // Importa todas as classes do pacote Swing (JFrame, JButton, JLabel, etc.)
 
+// Classe principal da aplicação
 public class SimpleGUI {
 
+    // Atributos da classe (componentes da interface)
+    // Eles são declarados aqui para poderem ser usados em vários métodos
+    private JFrame frame;
+    private JTextField textField;
+    private JButton button;
+    private JLabel label;
+
+    // Metodo principal (ponto de entrada do programa)
     public static void main(String[] args) {
 
-        // Cria uma janela (objeto JFrame)
-        JFrame frame = new JFrame("My First GUI");
+        // Cria um objeto da classe SimpleGUI
+        // Isso permite acessar os métodos não estáticos
+        SimpleGUI gui = new SimpleGUI();
 
-        // Define o tamanho da janela (largura, altura)
+        // Chama o metodo que cria e exibe a interface
+        gui.createAndShowGUI();
+    }
+
+    // Metodo responsável por organizar a criação da interface
+    public void createAndShowGUI() {
+
+        // Cria e configura a janela
+        createFrame();
+
+        // Cria os componentes (campo, botão, label)
+        createComponents();
+
+        // Adiciona os componentes na janela
+        addComponents();
+
+        // Define os eventos (ações do botão)
+        addEvents();
+
+        // Torna a janela visível
+        frame.setVisible(true);
+    }
+
+    // Metodo responsável por criar e configurar a janela principal
+    private void createFrame() {
+
+        // Cria a janela com título
+        frame = new JFrame("My First GUI");
+
+        // Define tamanho da janela (largura, altura)
         frame.setSize(300, 150);
 
-        // Define o que acontece quando clicar no X (fecha o programa)
+        // Define o que acontece ao clicar no X (encerra o programa)
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Remove o layout automático (usando posicionamento absoluto)
         frame.setLayout(null);
 
-        // Criação dos componentes
+        // Centraliza a janela na tela
+        frame.setLocationRelativeTo(null);
+    }
 
-        // Cria um campo de texto onde o usuário pode digitar
-        JTextField textField = new JTextField();
+    // Metodo responsável por criar os componentes da interface
+    private void createComponents() {
 
-        // Define posição (x, y) e tamanho (largura, altura)
+        // Cria o campo de texto
+        textField = new JTextField();
+
+        // Define posição e tamanho (x, y, largura, altura)
         textField.setBounds(20, 20, 150, 25);
 
-        // Cria um botão
-        JButton button = new JButton("Click Me");
+        // Cria o botão com texto
+        button = new JButton("Click Me");
 
         // Define posição e tamanho do botão
         button.setBounds(180, 20, 90, 25);
 
-        // Cria um texto inicial na tela
-        JLabel label = new JLabel("Hello!");
+        // Cria o label com texto inicial
+        label = new JLabel("Hello!");
 
         // Define posição e tamanho do label
         label.setBounds(20, 60, 250, 25);
+    }
 
-        // Adicionando componentes na janela
-        frame.add(textField); // Adiciona o campo de texto
-        frame.add(button);    // Adiciona o botão
-        frame.add(label);     // Adiciona o label
+    // Metodo responsável por adicionar os componentes na janela
+    private void addComponents() {
 
-        // Evento do botão (quando clicar)
+        // Adiciona o campo de texto ao frame
+        frame.add(textField);
+
+        // Adiciona o botão ao frame
+        frame.add(button);
+
+        // Adiciona o label ao frame
+        frame.add(label);
+    }
+
+    // Metodo responsável por definir os eventos da interface
+    private void addEvents() {
+
+        // Adiciona um "ouvinte de ação" ao botão
+        // Esse código será executado quando o botão for clicado
         button.addActionListener(e -> {
 
-            // Pega o texto digitado no campo
+            // Captura o texto digitado no campo
             String name = textField.getText();
 
-            // Atualiza o label com o nome digitado
+            // Atualiza o texto do label dinamicamente
             label.setText("Hello, " + name + "!");
         });
-
-        // Torna a janela visível (deve ser a última coisa)
-        frame.setVisible(true);
     }
 }
